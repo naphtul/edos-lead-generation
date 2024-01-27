@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:16.1
+    container_name: leads_db
+    environment:
+      POSTGRES_DB: leads_db
+      POSTGRES_USER: $(DB_USER)
+      POSTGRES_PASSWORD: $(DB_PASSWORD)
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db:/var/lib/postgresql/data
