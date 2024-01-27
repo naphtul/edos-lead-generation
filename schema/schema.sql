@@ -21,14 +21,30 @@ create table if not exists public.placersalespersons
 alter table public.placersalespersons
     owner to root;
 
+create table if not exists public.searches
+(
+    id          serial
+    primary key,
+    source      varchar(255),
+    searchterm  varchar(255),
+    searchdate  timestamp,
+    results     text
+    );
+
+alter table public.searches
+    owner to root;
+
 create table if not exists public.companies
 (
     id          serial
     primary key,
-    name        varchar(255) not null,
-    website     varchar(255),
-    description text,
-    segmentid   integer
+    name           varchar(255) not null,
+    website        varchar(255),
+    description    text,
+    relevancyscore integer,
+    searchid       integer
+    references public.searches,
+    segmentid      integer
     references public.segments
     );
 
@@ -45,6 +61,7 @@ create table if not exists public.locations
     postalcode varchar(10),
     pobox      varchar(50),
     country    varchar(50),
+    hours      varchar(255),
     companyid  integer
     references public.companies
     );
