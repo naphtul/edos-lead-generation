@@ -25,4 +25,6 @@ def strip_html_using_regex(html_text: str) -> str:
 
 
 def fetch_page(url: str) -> str:
+    if not url.startswith("http"):
+        return ""
     return requests.get(url).text

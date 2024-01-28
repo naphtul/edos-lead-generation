@@ -10,12 +10,15 @@ load_dotenv()
 
 
 class DB:
-    # TODO: Use psycop3 with all its async features, security features, etc.
-    def __init__(self):
+    # TODO: Use psycop3 with all its async features, etc.
+    def __init__(self) -> None:
         self.connection = None
         self.cursor = None
 
-    def connect(self):
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close_connection()
+
+    def connect(self) -> None:
         try:
             # Use environment variables for database connection parameters
             dbname = "leads_db"
@@ -63,7 +66,7 @@ class DB:
         except Exception as e:
             logging.exception(f"Error: Unable to insert data - {e}")
 
-    def query_data(self, table, columns="*", condition="1=1"):
+    def query_data(self, table: str, columns: str | list[str]="*", condition: str="1=1"):
         try:
             # Build the SQL query dynamically
             query = sql.SQL("SELECT {} FROM {} WHERE {}").format(
@@ -87,7 +90,7 @@ class DB:
             logging.exception(f"Error: Unable to query data - {e}")
             return None
 
-    def update_data(self, table, data, condition="1=1"):
+    def update_data(self, table: str, data: dict, condition: str="1=1") -> None:
         try:
             # Build the SQL query dynamically
             query = sql.SQL("UPDATE {} SET {} WHERE {}").format(
@@ -109,7 +112,7 @@ class DB:
         except Exception as e:
             logging.exception(f"Error: Unable to update data - {e}")
 
-    def delete_data(self, table, condition="1=1"):
+    def delete_data(self, table: str, condition: str="1=1") -> None:
         try:
             # Build the SQL query dynamically
             query = sql.SQL("DELETE FROM {} WHERE {}").format(
@@ -128,7 +131,7 @@ class DB:
         except Exception as e:
             logging.exception(f"Error: Unable to delete data - {e}")
 
-    def close_connection(self):
+    def close_connection(self) -> None:
         try:
             # Close the cursor and connection
             self.cursor.close()

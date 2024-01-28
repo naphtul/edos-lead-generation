@@ -17,10 +17,15 @@ class GoogleSearch:
         self.db = DB()
 
     def search(self, query: str) -> dict:
+        """
+        Search Google using SerpAPI
+        :param query: The search term to use
+        :return: SerpAPI's response
+        """
         options: dict = dict(
             engine='google',
             q=query,
-            location='New York, New York, United States',
+            location='New York, New York, United States',  # TODO: Make this dynamic
             gl='us',
             hl='en',
             safe='off',
@@ -33,6 +38,14 @@ class GoogleSearch:
             raise e
 
     def save_results(self, source: str, searchterm: str, searchdate: datetime, results: dict) -> int:
+        """
+        Save the search results to the database
+        :param source: The search engine used
+        :param searchterm: The search term used
+        :param searchdate: Today's date
+        :param results: The search results
+        :return: The search ID
+        """
         try:
             self.db.connect()
             data = dict(

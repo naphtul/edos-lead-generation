@@ -43,7 +43,7 @@ create table if not exists public.companies
     id          serial
     primary key,
     name           varchar(255) not null,
-    website        varchar(255),
+    website        varchar(255) unique not null,
     description    text,
     relevancyscore integer,
     searchid       integer
