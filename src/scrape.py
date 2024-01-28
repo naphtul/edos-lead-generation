@@ -126,6 +126,7 @@ class Scraper:
         for lead_person in lead_persons:
             if lead_person.name:
                 self.db.insert_data("leads", lead_person.__dict__)
+        logging.info(f"Finished processing data for {search_result['title']}")
 
     def crawl_and_scrape(self, term: str) -> None:
         """

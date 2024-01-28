@@ -41,7 +41,7 @@ class LeadPerson:
         self.cellphone = cellphone
         self.locationid = locationid
         self.companyid = companyid
-        self.placersalesperson = placersalesperson
+        self.placersalespersonid = placersalesperson
 
 
 class Location:
