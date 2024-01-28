@@ -22,6 +22,7 @@ class OpenAICompletions:
         # TODO: Configure no hallucinations
         completion = self.openai_client.chat.completions.create(
             model="gpt-4-0125-preview",
+            # TODO: Make it return a list of results instead of just one
             messages=[{"role": "system", "content": """You are an expert at scraping and parsing raw HTML into JSON. 
             You are given the following HTML. 
             Please extract the following details from the page. 

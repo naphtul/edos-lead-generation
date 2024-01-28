@@ -51,6 +51,9 @@ create table if not exists public.companies
 alter table public.companies
     owner to root;
 
+create index if not exists companies_name_index
+    on public.companies (name);
+
 create table if not exists public.locations
 (
     id         serial
@@ -73,9 +76,9 @@ create table if not exists public.leads
 (
     id                  serial
     primary key,
-    name                varchar(100) not null,
-    title               varchar(255),
-    email               varchar(255),
+    name                varchar(5000) not null,
+    title               varchar(5000),
+    email               varchar(5000),
     workphone           varchar(20),
     cellphone           varchar(20),
     locationid          integer
@@ -89,3 +92,5 @@ create table if not exists public.leads
 alter table public.leads
     owner to root;
 
+create index if not exists leads_name_index
+    on public.leads (name);
