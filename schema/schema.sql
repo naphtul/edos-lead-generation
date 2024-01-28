@@ -74,7 +74,7 @@ create table if not exists public.leads
     id                  serial
     primary key,
     name                varchar(100) not null,
-    title               varchar(50),
+    title               varchar(255),
     email               varchar(255),
     workphone           varchar(20),
     cellphone           varchar(20),
