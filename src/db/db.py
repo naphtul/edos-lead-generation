@@ -41,10 +41,10 @@ class DB:
         except Exception as e:
             logging.exception(f"Error: Unable to connect to the database - {e}")
 
-    def insert_data(self, table: str, data):
+    def insert_data(self, table: str, data: dict) -> int:
         try:
             # Build the SQL query dynamically
-            query = sql.SQL("INSERT INTO {} ({}) VALUES ({})").format(
+            query = sql.SQL("INSERT INTO {} ({}) VALUES ({}) RETURNING id;").format(
                 sql.Identifier(table),
                 sql.SQL(', ').join(map(sql.Identifier, data.keys())),
                 sql.SQL(', ').join(map(sql.Placeholder, data.keys()))
@@ -58,6 +58,8 @@ class DB:
 
             logging.info("Data inserted successfully.")
 
+            # Return record id
+            return self.cursor.fetchone()[0]
         except Exception as e:
             logging.exception(f"Error: Unable to insert data - {e}")
 
@@ -141,9 +143,10 @@ class DB:
 if __name__ == "__main__":
     db = DB()
     db.connect()
-    db.insert_data("searches", {"source": "google", "searchterm": "new york economic development organization", "searchdate": datetime.now(), "results": "test"})
+    term = "new york economic development organization"
+    db.insert_data("searches", {"source": "google", "searchterm": term, "searchdate": datetime.now(), "results": "test"})
     result = db.query_data("searches", columns=["searchterm", "searchdate"])
     print(result)
-    db.update_data("searches", {"source": "bing"}, condition="searchterm = 'new york economic development organization'")
+    db.update_data("searches", {"source": "bing"}, condition="id = 1")
     db.delete_data("searches", condition="id = 1")
     db.close_connection()

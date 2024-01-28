@@ -9,6 +9,8 @@ create table if not exists public.segments
 alter table public.segments
     owner to root;
 
+INSERT INTO public.segments (id, name, description) VALUES (1, 'EDO', 'Economic Development Organization');
+
 create table if not exists public.placersalespersons
 (
     id        serial
@@ -21,11 +23,13 @@ create table if not exists public.placersalespersons
 alter table public.placersalespersons
     owner to root;
 
+INSERT INTO public.placersalespersons (id, name, cellphone, email) VALUES (1, 'John Doe', '555-555-5555', 'johnny@placer.io');
+
 create table if not exists public.searches
 (
     id          serial
     primary key,
-    source      varchar(255),
+    source      varchar(50),
     searchterm  varchar(255),
     searchdate  timestamp,
     results     text

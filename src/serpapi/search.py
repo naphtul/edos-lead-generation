@@ -32,7 +32,7 @@ class GoogleSearch:
             logging.exception(e)
             raise e
 
-    def save_results(self, source: str, searchterm: str, searchdate: datetime, results: dict) -> None:
+    def save_results(self, source: str, searchterm: str, searchdate: datetime, results: dict) -> int:
         try:
             self.db.connect()
             data = dict(
@@ -41,7 +41,7 @@ class GoogleSearch:
                 searchdate=searchdate,
                 results=json.dumps(results)
             )
-            self.db.insert_data('searches', data)
+            return self.db.insert_data('searches', data)
         except Exception as e:
             logging.exception(e)
             raise e
