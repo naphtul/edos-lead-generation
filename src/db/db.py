@@ -59,7 +59,7 @@ class DB:
             # Commit the changes
             self.connection.commit()
 
-            logging.info("Data inserted successfully.")
+            logging.info(f"Data inserted successfully to {table}.")
 
             # Return record id
             return self.cursor.fetchone()[0]
