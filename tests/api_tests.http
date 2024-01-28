@@ -1,0 +1,11 @@
+### Get all segments
+GET http://localhost:5000/segments
+
+### Get companies by segment
+GET http://localhost:5000/companies/{{segment_id}}
+
+### Get leads by company
+GET http://localhost:5000/leads/{{company_id}}
+
+### Search companies by name
+GET http://localhost:5000/search?query={{query}}

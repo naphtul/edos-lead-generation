@@ -65,6 +65,7 @@ class DB:
             return self.cursor.fetchone()[0]
         except Exception as e:
             logging.exception(f"Error: Unable to insert data - {e}")
+            self.connection.rollback()
 
     def query_data(self, table: str, columns: str | list[str]="*", condition: str="1=1"):
         try:
@@ -111,6 +112,7 @@ class DB:
 
         except Exception as e:
             logging.exception(f"Error: Unable to update data - {e}")
+            self.connection.rollback()
 
     def delete_data(self, table: str, condition: str="1=1") -> None:
         try:
@@ -130,6 +132,7 @@ class DB:
 
         except Exception as e:
             logging.exception(f"Error: Unable to delete data - {e}")
+            self.connection.rollback()
 
     def close_connection(self) -> None:
         try:

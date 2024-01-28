@@ -103,7 +103,7 @@ class Scraper:
                     hours=found["hours_of_operation"] if "hours_of_operation" in found and found["hours_of_operation"] else found["office_hours"] if "office_hours" in found and found["office_hours"] else None,
                     companyid=company_id,
                 ))
-        location_id = 0
+        location_id = 1
         for location in locations:  # TODO: Handle duplicate locations
             if location.address:
                 location_id = self.db.insert_data("locations", location.__dict__)
@@ -125,7 +125,7 @@ class Scraper:
                 ))
         for lead_person in lead_persons:
             if lead_person.name:
-                self.db.insert_data("leadpersons", lead_person.__dict__)
+                self.db.insert_data("leads", lead_person.__dict__)
 
     def crawl_and_scrape(self, term: str) -> None:
         """

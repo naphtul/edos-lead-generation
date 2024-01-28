@@ -9,8 +9,6 @@ create table if not exists public.segments
 alter table public.segments
     owner to root;
 
-INSERT INTO public.segments (id, name, description) VALUES (1, 'EDO', 'Economic Development Organization');
-
 create table if not exists public.placersalespersons
 (
     id        serial
@@ -22,8 +20,6 @@ create table if not exists public.placersalespersons
 
 alter table public.placersalespersons
     owner to root;
-
-INSERT INTO public.placersalespersons (id, name, cellphone, email) VALUES (1, 'John Doe', '555-555-5555', 'johnny@placer.io');
 
 create table if not exists public.searches
 (
@@ -73,7 +69,7 @@ create table if not exists public.locations
 alter table public.locations
     owner to root;
 
-create table if not exists public.leadspersons
+create table if not exists public.leads
 (
     id                  serial
     primary key,
@@ -90,6 +86,6 @@ create table if not exists public.leadspersons
     references public.placersalespersons
     );
 
-alter table public.leadspersons
+alter table public.leads
     owner to root;
 
