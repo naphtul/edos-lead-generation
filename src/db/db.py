@@ -24,7 +24,7 @@ class DB:
             dbname = "leads_db"
             user = os.environ["DB_USER"]
             password = os.environ["DB_PASSWORD"]
-            host = "localhost"
+            host = os.environ["DB_HOST"]
             port = "5432"
 
             # Establish the connection
