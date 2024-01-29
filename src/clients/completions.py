@@ -27,6 +27,7 @@ class OpenAICompletions:
             You are given the following HTML. 
             Please extract the following details from the page. 
             If you can't find the info, return an empty String.
+            Do not hallucinate in any way.
             If you can find more than one person, return them in a list (array).
             """},
             {"role": "user", "content": html_text},

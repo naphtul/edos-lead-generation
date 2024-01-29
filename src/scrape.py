@@ -2,7 +2,7 @@ import json
 import logging
 
 from schema.types import Company, LeadPerson, Location
-from src.db.db import DB
+from src.lib.db import DB
 from src.clients.completions import OpenAICompletions
 from src.clients.search import GoogleSearch
 from src.utils.utils import strip_html_using_regex, fetch_page

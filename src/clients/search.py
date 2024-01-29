@@ -6,7 +6,7 @@ from datetime import datetime
 import serpapi
 from dotenv import load_dotenv
 
-from src.db.db import DB
+from src.lib.db import DB
 
 load_dotenv()
 
